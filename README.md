@@ -1,12 +1,7 @@
-# React + Vite
+### Frontend for database project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is simply a prototype frontend for managing a chat application. The main idea of this repository is an interface for the chat app in which you can chat to anyone who has registed on this website.
 
-Currently, two official plugins are available:
+To play around with this application, go to [databasefrontend.netlify.app](https://databasefrontend.netlify.app/) and register with an email and a rememberable password (we hold no other data so you can have 123456 as your password). Then you will find a list of all emails that have signed up. You can make another dummy account and open a new tab or browser to try it out!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+By Yousef Marey
