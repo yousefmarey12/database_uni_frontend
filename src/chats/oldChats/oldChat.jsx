@@ -87,7 +87,7 @@ export function OldChat({ currentUser, otherPerson }) {
         <div onClick={() => setIsShowed(!isShowed)}>Chat with {OtherUser ? OtherUser.username : ''}</div>
         <ul style={{ display: isShowed ? 'block' : 'none' }}>
             {chats.length != 0 ? chats.map((el, i) => el.message && el.email ? (
-                <li key={i}>{el.email}: {el.message}</li>
+                <li key={i}>CLICK ON ME {el.email}: {el.message}</li>
             ) : '') : ''}
         </ul>
         <input type="text" ref={inputRef} name="input" placeholder="Enter Chat" />
