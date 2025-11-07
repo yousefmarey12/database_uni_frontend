@@ -1,6 +1,7 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 export function Login({ setCurrentUser }) {
     // Import the functions you need from the SDKs you need
@@ -22,6 +23,7 @@ export function Login({ setCurrentUser }) {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     let auth = getAuth(app)
+    let [isLoading, setIsLoading] = useState(false)
 
     let func = () => {
         let formData = new FormData(formRef.current as HTMLFormElement)
@@ -29,6 +31,7 @@ export function Login({ setCurrentUser }) {
         formData.forEach((v, k) => {
             obj[k] = v
         })
+        setIsLoading(true)
         signInWithEmailAndPassword(auth, obj.login_email, obj.login_password)
             .then((v) => {
                 console.log("Logged in")
@@ -37,21 +40,39 @@ export function Login({ setCurrentUser }) {
                     uid: v.user.uid
                 }
                 setCurrentUser(obj)
+                setIsLoading(false)
 
+            }).catch((e) => {
+                setIsLoading(false)
             })
     }
     return (<form ref={formRef} id="form_login" onSubmit={(e) => {
         e.preventDefault()
         func()
     }}>
-        <div id="login">
-            <h1>Login</h1>
-            <label htmlFor="login_email">Email</label>
-            <input id="login_email" name="login_email" placeholder="Enter Email" type="email" />
-            <label htmlFor="login_password">Password</label>
-            <input id="login_password" name="login_password" placeholder="Enter Password" type="password" />
-            <button type="submit">Submit</button>
+        {
+            !isLoading ? (
+                <div id="login">
+                    <h1>Login</h1>
+                    <label htmlFor="login_email">Email</label>
+                    <input id="login_email" name="login_email" placeholder="Enter Email" type="email" />
+                    <label htmlFor="login_password">Password</label>
+                    <input id="login_password" name="login_password" placeholder="Enter Password" type="password" />
+                    <button type="submit">Submit</button>
 
-        </div>
+                </div>
+            ) : (
+                <Oval
+                    height={80}
+                    width={80}
+                    color="#4fa94d"
+                    visible={true}
+                    ariaLabel="oval-loading"
+                    secondaryColor="#4fa94d"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                />
+            )
+        }
     </form>)
 }

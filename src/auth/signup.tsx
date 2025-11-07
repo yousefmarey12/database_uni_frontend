@@ -1,11 +1,12 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 export function Signup({ setCurrentUser }) {
     let formRef = useRef<HTMLFormElement>(null)
-    console.log(import.meta.env.VITE_apiKey)
+
     const firebaseConfig = {
         apiKey: import.meta.env.VITE_apiKey,
         authDomain: "fueproject-edf68.firebaseapp.com",
@@ -19,16 +20,18 @@ export function Signup({ setCurrentUser }) {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     let auth = getAuth(app)
+    let [isLoading, setIsLoading] = useState(false)
     let func = e => {
 
-        console.log("hello ss")
+
 
         let formData = new FormData(formRef.current as HTMLFormElement)
         let obj = Object.create(null)
         formData.forEach((v, k) => {
             obj[k] = v
         })
-        fetch('database_uni_project_fe /signup', {
+        setIsLoading(true)
+        fetch('https://database-uni-backend.fly.dev/signup', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -50,12 +53,13 @@ export function Signup({ setCurrentUser }) {
                             uid: v.user.uid
                         }
                         setCurrentUser(obj1)
-
+                        setIsLoading(false)
                     })
             })
             .catch((e) => {
                 console.log("ERR")
                 console.log(e)
+                setIsLoading(false)
             })
     }
     return (
@@ -64,14 +68,26 @@ export function Signup({ setCurrentUser }) {
 
         }
         } id="form_signup">
-            <div id="signup">
-                <h1>Sign Up</h1>
-                <label htmlFor="signup_email">Email</label>
-                <input id="signup_email" name="signup_email" placeholder="Enter Email" type="email" />
-                <label htmlFor="signup_password">Password</label>
-                <input id="signup_password" name="signup_password" placeholder="Enter Password" type="password" />
+            {!isLoading ? (
+                <div id="signup">
+                    <h1>Sign Up</h1>
+                    <label htmlFor="signup_email">Email</label>
+                    <input id="signup_email" name="signup_email" placeholder="Enter Email" type="email" />
+                    <label htmlFor="signup_password">Password</label>
+                    <input id="signup_password" name="signup_password" placeholder="Enter Password" type="password" />
 
-            </div>
+                </div>
+            ) : <Oval
+                height={80}
+                width={80}
+                color="#4fa94d"
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="#4fa94d"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+            />}
+
 
             <button onClick={func} type="submit">Submit</button>
         </form>

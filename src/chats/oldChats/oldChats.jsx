@@ -6,8 +6,7 @@ export function OldChats({ currentUser }) {
     let [chats, setChats] = useState([])
     let [isPending, setIsPending] = useState(false)
     useEffect(() => {
-        console.log("does this rerender amazingg")
-        console.log(currentUser)
+
         let obj = {
             uid: currentUser.uid
         }
@@ -22,27 +21,23 @@ export function OldChats({ currentUser }) {
                 return v.json()
             })
             .then((v) => {
-                console.log(v)
+
 
                 if (Array.isArray(v)) {
                     setChats(v)
                 }
                 else {
-                    console.log("gpp")
+
                     setChats([v])
                 }
-                console.log("my chats")
-                console.log(chats)
+
 
 
 
             })
     }, [currentUser])
 
-    useEffect(() => {
-        console.log("chats")
-        console.log(chats)
-    }, [chats])
+
     return (
         <div>
             {chats.length != 0 ? chats.map((el, i) => (<OldChat key={i} currentUser={currentUser} otherPerson={extractOtherUser(currentUser.uid, el)} />)) : ''}

@@ -16,8 +16,7 @@ export function OldChat({ currentUser, otherPerson }) {
             return v.json()
         })
             .then((v) => {
-                console.log("v")
-                console.log(v)
+
                 setOtherUser(v)
             })
 
@@ -42,9 +41,9 @@ export function OldChat({ currentUser, otherPerson }) {
                     return v.json()
                 })
                 .then(v => {
-                    console.log("v chats")
+
                     if (Array.isArray(v)) {
-                        console.log(v)
+
                         setChats(v)
                     }
                     else {
@@ -73,8 +72,7 @@ export function OldChat({ currentUser, otherPerson }) {
                 return v.json()
             })
             .then((v) => {
-                console.log("v chats")
-                console.log(v)
+
                 setChats(v)
             })
             .catch((e) => {
