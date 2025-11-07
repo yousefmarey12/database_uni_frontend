@@ -28,7 +28,7 @@ export function Signup({ setCurrentUser }) {
         formData.forEach((v, k) => {
             obj[k] = v
         })
-        fetch('http://localhost:5000/signup', {
+        fetch('database_uni_project_fe /signup', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

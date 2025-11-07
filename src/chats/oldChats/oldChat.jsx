@@ -8,7 +8,7 @@ export function OldChat({ currentUser, otherPerson }) {
     let inputRef = useRef(null)
     let chatID = getChatID(currentUser.uid, otherPerson)
     useEffect(() => {
-        fetch('http://localhost:5000/users/' + otherPerson, {
+        fetch('https://database-uni-backend.fly.dev/users/' + otherPerson, {
             headers: {
                 "Content-Type": 'application/json'
             }
@@ -33,7 +33,7 @@ export function OldChat({ currentUser, otherPerson }) {
 
     let fetchChat = id => {
         setInterval(() => {
-            fetch('http://localhost:5000/chat/' + id, {
+            fetch('https://database-uni-backend.fly.dev/chat/' + id, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -62,7 +62,7 @@ export function OldChat({ currentUser, otherPerson }) {
             email: currentUser.email,
             id: chatID
         }
-        fetch('http://localhost:5000/chat', {
+        fetch('https://database-uni-backend.fly.dev/chat', {
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
